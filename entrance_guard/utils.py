@@ -1,8 +1,6 @@
 import os
 import face_recognition
-import tkinter
 
-from tkinter import messagebox
 from numpy import ndarray
 
 
@@ -29,10 +27,3 @@ def my_face_recognition(image_to_detect: ndarray) -> bool:
                 return True
 
     return False
-
-
-def show_info(info: str):
-    root = tkinter.Tk()
-    root.withdraw()
-
-    messagebox.showinfo("人脸识别结果", info)

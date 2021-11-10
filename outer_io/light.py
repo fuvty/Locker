@@ -11,5 +11,6 @@ class Light:
     def blink(self, loop_time= 5):
         for i in range(loop_time):
             self.led.toggle()
-            time.sleep(1)
+            time.sleep(0.5)
             self.led.toggle()
+            time.sleep(0.5)

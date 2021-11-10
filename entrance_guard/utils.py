@@ -1,4 +1,5 @@
 import os
+import cv2
 import face_recognition
 
 from numpy import ndarray
@@ -27,3 +28,21 @@ def my_face_recognition(image_to_detect: ndarray) -> bool:
                 return True
 
     return False
+
+
+def save_image():
+    cap = cv2.VideoCapture(0)
+
+    while cap.isOpened():
+        _, frame = cap.read()
+        cv2.imshow("press y to save image", frame)
+
+        input_key = cv2.waitKey(1) & 0xFF
+        if input_key == ord('y'):  # 按下y键，进入下面的人脸识别操作
+            filename = "dataset/" + str(len(list(os.walk(os.getcwd() + "\\dataset"))[0][2]) + 1) + ".jpg"
+            cv2.imwrite(filename=filename, img=frame)
+
+            cv2.waitKey(3000)
+            cap.release()  # 释放摄像头
+            cv2.destroyAllWindows()  # 释放并销毁窗口
+            break

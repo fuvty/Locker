@@ -1,7 +1,7 @@
 import cv2
 import face_recognition
 
-from utils import my_face_recognition
+from entrance_guard.utils import my_face_recognition
 
 def RecInterface() -> bool:
     cap = cv2.VideoCapture(0)

@@ -20,17 +20,15 @@ class Motor:
         GPIO.output(self.pin_pull[0], GPIO.LOW)
         GPIO.output(self.pin_pull[1], GPIO.LOW)
         time.sleep(max_time)
-        GPIO.output(self.pin_push[0], GPIO.LOW)
-        GPIO.output(self.pin_push[1], GPIO.LOW)
-        GPIO.output(self.pin_pull[0], GPIO.LOW)
-        GPIO.output(self.pin_pull[1], GPIO.LOW)
-
+        
     def pull(self, max_time =3):
         GPIO.output(self.pin_push[0], GPIO.LOW)
         GPIO.output(self.pin_push[1], GPIO.LOW)
         GPIO.output(self.pin_pull[0], GPIO.HIGH)
         GPIO.output(self.pin_pull[1], GPIO.HIGH)
         time.sleep(max_time)
+
+    def stop(self):
         GPIO.output(self.pin_push[0], GPIO.LOW)
         GPIO.output(self.pin_push[1], GPIO.LOW)
         GPIO.output(self.pin_pull[0], GPIO.LOW)

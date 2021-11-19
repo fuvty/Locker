@@ -23,12 +23,15 @@ class Keypad:
         # The GPIO pin of the column of the key that is currently
         # being held down or -1 if no key is pressed
         self.keypadPressed = -1
-        self.secretCode = "3333"
+        #self.password = "3333"
         self.input = ""
         self.key=""
         self.quit=False
         self.check=False
 
+        f=open("outer_io/password.txt",'r')
+        self.password=f.read()
+        f.close()
         # Setup GPIO
         GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BCM)
@@ -81,10 +84,11 @@ class Keypad:
             else:
                 key=self.getKey()
                 if key=='*':
-                    if self.input == self.secretCode:
+                    if self.input == self.password:
                         print("Code correct!")
                         self.quit=True
                         self.check=True
+                        self.input=""
                         # TODO: Unlock a door, turn a light on, etc.
                     else:
                         print("Incorrect code!")
@@ -122,7 +126,12 @@ class Keypad:
                         new_password=""
                     else:
                         print("New password has been set!")
-                        self.secretcode=new_password
+                        self.password=new_password
+                        f=open("outer_io/password.txt",'w')
+                        f.write(self.password)
+                        f.close()
+                        print("self.password",self.password)
+                        self.quit=True
                 elif key=='#':
                     print("Input reset!")
                     new_password=""
@@ -144,7 +153,7 @@ class Keypad:
     #     ## 检查是否确认密码  *
     #     GPIO.output(self.L4, GPIO.HIGH)
     #     if (not pressed and GPIO.input(self.C1) == 1):
-    #         if self.input == self.secretCode:
+    #         if self.input == self.password:
     #             print("Code correct!")
     #             self.quit=True
     #             self.check=True

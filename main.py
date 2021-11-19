@@ -96,14 +96,13 @@ class Controller:
             print("Please confirm your old password")
             self.keypad.input_password()
             self.keypad.quit=False
-            if self.keypad.check: 
+            if self.keypad.check:
                 print("Please enter your new password")
                 self.keypad.change_password()
             self.keypad.quit=False
             self.keypad.check=False
             self.status=self.State.WAITING
             # keyChain.change()
-            self.status = self.State.WAITING
         elif self.status == self.State.SAVE_IMAGE:
             '''
             write face info

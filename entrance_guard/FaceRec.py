@@ -13,9 +13,10 @@ def RecInterface(keypad :Keypad) -> bool:
         # cv2.imshow("Access Control System Based on Face Recognition", frame_origin)
 
         # input_key = cv2.waitKey(1) & 0xFF
-        cv2.waitKey(1)
+        # cv2.waitKey(1)
         input_key = keypad.getKey()
         if input_key == '*':  # 按下*键，进入下面的人脸识别操作
+            _, frame_origin = cap.read()
             print("save image")
             cv2.imwrite('entrance_guard/capture/tmp.jpg', frame_origin)
             # frame = frame_origin.copy()

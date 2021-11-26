@@ -1,11 +1,12 @@
 import os
 import cv2
 import face_recognition
+# from deepface import DeepFace
 
 from numpy import ndarray
 
 
-def my_face_recognition(image_to_detect: ndarray) -> bool:
+def my_face_recognition(image_to_detect) -> bool:
     # 输入为一幅图像，保证只有一个人脸，输出结果为是否有门禁权限
 
     known_face_encodings = face_recognition.face_encodings(image_to_detect)
@@ -18,14 +19,21 @@ def my_face_recognition(image_to_detect: ndarray) -> bool:
         for file in files:
             file_path = os.path.join(root, file)
             # 加载一张单人照
+
+            # obj = DeepFace.verify(image_to_detect_path, file_path, model_name = 'ArcFace', detector_backend = 'retinaface')
+            # print(obj["verified"])
+            # if obj["verified"] is True:
+            #     return True
+
+
             dataset_image = face_recognition.load_image_file(file_path)
 
             # face_encodings返回的是列表类型，我们只需要拿到第一个人脸编码即可
             compare_face_encodings = face_recognition.face_encodings(dataset_image)[0]
 
             # 注意第二个参数，只能是答案个面部特征编码，不能传列表
-            matches = face_recognition.compare_faces(known_face_encodings, compare_face_encodings)
-            print(file)
+            matches = face_recognition.compare_faces(known_face_encodings, compare_face_encodings, tolerance= 0.45)
+            print(file_path)
             print(matches)
             if matches[0]:
                 return True

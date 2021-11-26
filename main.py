@@ -1,6 +1,6 @@
 from builtins import print
-import cv2
-import face_recognition
+# import cv2
+# import face_recognition
 import time
 from entrance_guard.utils import my_face_recognition
 from entrance_guard.FaceRec import RecInterface
@@ -75,6 +75,7 @@ class Controller:
                 lock_toggle.lock_open(self.motor, self.light)
             else:
                 self.status = self.State.WAITING   
+            self.status = self.State.WAITING
         elif self.status == self.State.ENTER_PASSWORD:
             '''
             enter password and unlock
